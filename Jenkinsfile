@@ -37,7 +37,8 @@ pipeline {
                 sh "chmod +x ./install_helm.sh"
                 sh "./install_helm.sh"
                 withCredentials([
-                    file(credentialsId: 'meity-eks-kube', variable: 'KUBECONFIG'),
+		    usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME'),
+    		    file(credentialsId: 'meity-eks-kube', variable: 'KUBECONFIG'),
                     string(credentialsId: 'meity-eks-iam-access', variable: 'AWS_ACCESS_KEY_ID'),
 	                string(credentialsId: 'meity-eks-iam-secret', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]) {
